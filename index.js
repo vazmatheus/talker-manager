@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const generateToken = require('./helpers/generateToken');
 
 const app = express();
 app.use(bodyParser.json());
@@ -28,6 +29,10 @@ app.get('/talker/:id', (req, res) => {
     });
   }
   return res.status(200).json(talkers);
+});
+
+app.post('/login', (_req, res) => {
+  res.status(200).json({ token: generateToken() });
 });
 
 app.listen(PORT, () => {
