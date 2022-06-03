@@ -57,6 +57,21 @@ app.post('/talker', validateToken, validateName, validateAge, validateTalk, vali
     return res.status(201).json(obj);
 });
 
+app.put('/talker/:id', validateToken, validateName, validateAge, validateTalk, validateDate,
+  validateRate,
+  (req, res) => {
+    const { id } = req.params;
+    const { name, age, talk } = req.body;
+    const data = fs.readFileSync('./talker.json', 'utf-8');
+    const talkers = JSON.parse(data);
+    const talkerFinded = talkers.find((talker) => talker.id === Number(id));
+    const index = talkers.indexOf(talkerFinded);
+    const obj = { id: Number(id), name, age, talk };
+    talkers.splice(index, 1, obj);
+    fs.writeFileSync('./talker.json', JSON.stringify(talkers));
+    return res.status(200).json(obj);
+});
+
 app.listen(PORT, () => {
   console.log('Online');
 });
