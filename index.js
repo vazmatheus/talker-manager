@@ -30,6 +30,15 @@ app.get('/talker', (_req, res) => {
   return res.status(200).json(JSON.parse(data));
 });
 
+app.get('/talker/search', validateToken, (req, res) => {
+  const { q } = req.query;
+  const data = fs.readFileSync(talkerJson, 'utf-8');
+  const talkers = JSON.parse(data);
+  const talkerFilter = talkers.filter((talker) => talker.name.includes(q));
+
+  return res.status(200).json(talkerFilter);
+});
+
 app.get('/talker/:id', (req, res) => {
   const { id } = req.params;
   const data = fs.readFileSync(talkerJson, 'utf8');
