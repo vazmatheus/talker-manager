@@ -3,13 +3,13 @@ const validateToken = (req, res, next) => {
 
   if (!authorization) {
     return res.status(401).json({
-      message: 'Token não encontrado',
+      message: 'Token not found',
     });
   }
 
   if (authorization.length !== 16) {
     return res.status(401).json({
-      message: 'Token inválido',
+      message: 'Invalid Token',
     });
   }
   next();
@@ -20,13 +20,13 @@ const validateName = (req, res, next) => {
 
   if (!name) {
     return res.status(400).json({ 
-      message: 'O campo "name" é obrigatório',
+      message: 'The "name" field is required',
     });
   }
 
   if (name.length < 3) {
     return res.status(400).json({ 
-      message: 'O "name" deve ter pelo menos 3 caracteres',
+      message: 'The "name" must be at least 3 characters long',
     });
   }
   next();
@@ -37,13 +37,13 @@ const validateAge = (req, res, next) => {
 
   if (!age) {
     return res.status(400).json({
-      message: 'O campo "age" é obrigatório',
+      message: 'The field "age" is required',
     });
   }
 
   if (age < 18) {
     return res.status(400).json({ 
-      message: 'A pessoa palestrante deve ser maior de idade',
+      message: 'The person speaking must be of legal age',
     });
   }
   next();
@@ -54,7 +54,7 @@ const validateTalk = (req, res, next) => {
 
   if (!talk || !talk.watchedAt || typeof talk.rate !== 'number') {
     return res.status(400).json({
-      message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios',
+      message: 'The "talk" field is required and "watchedAt" and "rate" cannot be empty',
     });
   }
   next();
@@ -66,7 +66,7 @@ const validateDate = (req, res, next) => {
 
   if (!dateRegex.test(talk.watchedAt)) {
     return res.status(400).json({
-      message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"',
+      message: 'The "watchedAt" field must have the format "dd/mm/yyyy"',
     });
   }
   next();
@@ -77,7 +77,7 @@ const validateRate = (req, res, next) => {
 
   if (!(talk.rate >= 1 && talk.rate <= 5)) {
     return res.status(400).json({ 
-      message: 'O campo "rate" deve ser um inteiro de 1 à 5',
+      message: 'The "rate" field must be an integer from 1 to 5',
     });
   }
   next();

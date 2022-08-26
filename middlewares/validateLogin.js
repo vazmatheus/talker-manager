@@ -3,13 +3,13 @@ const validateEmail = (req, res, next) => {
 
   if (!email) { 
     return res.status(400).json({
-    message: 'O campo "email" é obrigatório',
+    message: 'The "email" field is required',
     });
   }
   
   if (!(email.includes('@') && email.includes('.com'))) { 
     return res.status(400).json({
-    message: 'O "email" deve ter o formato "email@email.com"',
+    message: 'The "email" must have the format "user@eexamplemail.com"',
     });
   }
   next();
@@ -20,13 +20,13 @@ const validatePassword = (req, res, next) => {
 
   if (!password) { 
     return res.status(400).json({
-    message: 'O campo "password" é obrigatório',
+    message: 'The "password" field is required',
     });
   }
   
   if ((password.length < 6)) { 
     return res.status(400).json({
-    message: 'O "password" deve ter pelo menos 6 caracteres',
+    message: 'The "password" must be at least 6 characters long',
     });
   }
   next();
